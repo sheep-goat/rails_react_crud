@@ -19,7 +19,7 @@ console.log('Hello World from Webpacker')
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Index from '../book/index';
+import Index from './index';
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
