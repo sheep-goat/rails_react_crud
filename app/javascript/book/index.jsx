@@ -37,7 +37,7 @@ class Index extends React.Component {
 
     showDetail(id) {
         this.getBook(id);
-        this.hideToggle();
+        this.hideToggle(this.state.showFlag);
     }
 
     getBook(id) {
@@ -59,9 +59,9 @@ class Index extends React.Component {
         });
     }
 
-    hideToggle() {
+    hideToggle(showFlag) {
         this.setState({
-            showFlag: !this.state.showFlag
+            showFlag: !showFlag
         });
     }
 
@@ -82,6 +82,8 @@ class Index extends React.Component {
                     <Show
                         book={book}
                         showFlag={showFlag}
+                        getBooks={this.getBooks}
+                        hideToggle={this.hideToggle}
                     />
                 </div>
             </div>

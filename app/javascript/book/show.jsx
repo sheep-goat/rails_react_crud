@@ -3,6 +3,25 @@ import React from 'react';
 class Show extends React.Component {
     constructor(props) {
         super(props);
+
+        this.deleteBook = this.deleteBook.bind(this);
+    }
+
+    deleteBook(id) {
+        let request = new Request(`/api/books/${this.props.book.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+        });
+
+        fetch(request).then(function (response) {
+            return response;
+        }).then(() => {
+            this.props.getBooks();
+        }).catch(function (error) {
+            console.error(error);
+        });
     }
 
     render() {
@@ -15,6 +34,7 @@ class Show extends React.Component {
                             <div className="detail">・著者：{this.props.book.author}</div>
                             <div className="detail">・出版社：{this.props.book.publisher}</div>
                             <div className="detail">・ジャンル：{this.props.book.genre}</div>
+                            <button onClick={this.deleteBook.bind(this, this.props.book.id)}>削除</button>
                         </div>
                     </div>
                 </div>
