@@ -1,10 +1,13 @@
 import React from 'react';
+import Show from './show'
 
 class Index extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             books: [],
+            book: [],
+            showFlag: false,
         }
         this.getBooks = this.getBooks.bind(this);
     }
@@ -32,8 +35,38 @@ class Index extends React.Component {
         });
     }
 
+    showDetail(id) {
+        this.getBook(id);
+        this.hideToggle();
+    }
+
+    getBook(id) {
+        let request = new Request(`/api/books/${id}`, {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        });
+
+        fetch(request).then(function (response) {
+            return response.json();
+        }).then(function (book) {
+            this.setState({
+                book: book
+            });
+        }.bind(this)).catch(function (error) {
+            console.error(error);
+        });
+    }
+
+    hideToggle() {
+        this.setState({
+            showFlag: !this.state.showFlag
+        });
+    }
+
     render() {
-        const { books } = this.state;
+        const { books, book, showFlag } = this.state;
 
         return (
             <div>
@@ -41,11 +74,15 @@ class Index extends React.Component {
                 <div>
                     {books.map(function (book) {
                         return (
-                            <div>
+                            <div key={book.id} onClick={() => this.showDetail(book.id)}>
                                 <span>{book.title}</span>
                             </div>
                         )
-                    })}
+                    }.bind(this))}
+                    <Show
+                        book={book}
+                        showFlag={showFlag}
+                    />
                 </div>
             </div>
         )
