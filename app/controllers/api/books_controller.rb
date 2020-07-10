@@ -9,6 +9,11 @@ class Api::BooksController < ApplicationController
     render json: book
   end
 
+  def create
+    book = Book.create!(book_params)
+    render json: book
+  end
+
   def destroy
     book = Book.find(params[:id])
     book.destroy

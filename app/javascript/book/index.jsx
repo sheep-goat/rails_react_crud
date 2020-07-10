@@ -1,5 +1,5 @@
 import React from 'react';
-import Show from './show'
+import Show from './show';
 
 class Index extends React.Component {
     constructor(props) {
