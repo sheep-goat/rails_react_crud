@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 class Show extends React.Component {
     constructor(props) {
@@ -25,6 +26,10 @@ class Show extends React.Component {
     }
 
     render() {
+        const location = {
+            pathname: "/books/update/" + this.props.book.id,
+            state: {book: this.props.book}
+        }
         return (
             <div style={{display: this.props.showFlag ? 'block' : 'none'}}>
                 <div className="col">
@@ -34,6 +39,7 @@ class Show extends React.Component {
                             <div className="detail">・著者：{this.props.book.author}</div>
                             <div className="detail">・出版社：{this.props.book.publisher}</div>
                             <div className="detail">・ジャンル：{this.props.book.genre}</div>
+                            <Link to={location}>本の編集</Link>
                             <button onClick={this.deleteBook.bind(this, this.props.book.id)}>削除</button>
                         </div>
                     </div>

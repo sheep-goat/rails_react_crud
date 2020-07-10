@@ -19,6 +19,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Index from '../book/index';
 import Create from "../book/create";
+import Update from '../book/update'
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
                 <Switch>
                     <Route exact path='/books' component={ Index }/>
                     <Route exact path='/books/create' component={ Create } />
+                    <Route exact path='/books/update/:id' component={ Update } />
                 </Switch>
             </div>
         </Router>
