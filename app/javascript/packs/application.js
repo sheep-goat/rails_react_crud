@@ -15,15 +15,46 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Index from '../book/index';
+import Create from "../book/create";
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+
+const App = () => {
+    return (
+        <Router>
+            <div id="App">
+                <Header />
+                <Switch>
+                    <Route exact path='/books' component={ Index }/>
+                    <Route exact path='/books/create' component={ Create } />
+                </Switch>
+            </div>
+        </Router>
+    );
+}
+
+const Header = () => (
+    <div>
+        <nav>
+            <div className="nav-wrapper">
+                <Link to="/books">Bookshelf</Link>
+                <ul id="nav-mobile" className="right">
+                    <li>
+                        <Link to="/books/create">本の登録</Link>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+)
+
+export default App;
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        <Index />,
+        <App />,
         document.getElementById('example-app')
     )
 })
