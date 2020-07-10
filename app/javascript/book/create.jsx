@@ -13,7 +13,7 @@ class Create extends React.Component {
         this.createBook = this.createBook.bind(this);
     }
 
-    createBook() {
+    createBook(event) {
         let request = new Request('/api/books', {
             method: 'POST',
             headers: new Headers({
@@ -41,6 +41,8 @@ class Create extends React.Component {
                 genre: ''
             })
         });
+
+        event.preventDefault();
     }
 
     render() {
